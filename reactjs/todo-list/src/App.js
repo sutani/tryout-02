@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import axios from 'axios';
 
-class App extends Component {
-   constructor(props) {
+const API_BASE_URL = 'http://localhost:8000/api'
+
+const customAxios = axios.create({
+    baseURL: API_BASE_URL
+});
+
+export default class App extends React.Component {
+  constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
     this.state = {items: [], text: ''};
   }
 
@@ -37,8 +43,45 @@ class App extends Component {
       items: prevState.items.concat(newItem),
       text: ''
     }));
+
+    this.submitItem(newItem)
+  }
+
+  submitItem(item) {
+
+    console.log('Data to submit ..', item);
+    const requestObject = {
+        id: item.id,
+        text: item.text
+    }
+
+   customAxios.post(`/todolist`, requestObject, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      console.log('Response ', response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  componentDidMount() {
+   customAxios.get(`/todolist`)
+   .then(response => {
+
+    console.log(response.data.data)
+    this.setState((prevState) => ({
+      items: prevState.items.concat(response.data.data),
+      text: ''
+    }));
+     
+    }).catch(err => {
+      console.log(err)
+    })
   }
 }
+
 class TodoList extends React.Component {
   render() {
     return (
@@ -50,5 +93,3 @@ class TodoList extends React.Component {
     );
   }
 }
-
-export default App;

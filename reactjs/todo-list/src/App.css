@@ -8,10 +8,24 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: springgreen;
   height: 150px;
   padding: 20px;
   color: white;
+}
+.Button {
+  background-color: dodgerblue;
+  font-family: Arial;
+
+  color:white;
+}
+
+.Container {
+  position: center;
+  font-family: Arial;
+  height: 20px;
+  width: 80px;
+  color:black;
 }
 
 .App-intro {
