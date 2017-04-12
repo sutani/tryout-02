@@ -25,10 +25,9 @@ export default class speechtoText extends Component {
       text: 'Your Text'
     }
   }
-  speechtotex(){
+  speechtotext(){
     SpeechModule.start()
     .then(resp =>{
-      console.log('hello', resp);
       this.setState({ text: resp });
     })
     .catch(err => console.log('err', err))
@@ -38,9 +37,9 @@ export default class speechtoText extends Component {
      return (
       <View style={styles.container}>
           <View>
-        <TouchableOpacity onPress={() => this.speechtotex()}> 
+        <TouchableOpacity onPress={() => this.speechtotext()}> 
           <Image
-                style={{ width: 40, height: 60, alignItems:'center' }}
+                style={{ width: 100, height: 100, alignItems:'center' }}
                 source={cloud}
               />
               </TouchableOpacity>
