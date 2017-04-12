@@ -12,15 +12,17 @@ import {
     View,
     NativeModules,
     TouchableOpacity,
+    Image,
 
 } from 'react-native';
 const SpeechModule = NativeModules.speechtoText;
+const cloud = require('./google.png');
 
 export default class speechtoText extends Component {
    constructor(props){
     super(props);
     this.state = {
-      text: 'initial text'
+      text: 'Your Text'
     }
   }
   speechtotex(){
@@ -35,14 +37,17 @@ export default class speechtoText extends Component {
     render() {
      return (
       <View style={styles.container}>
+          <View>
+        <TouchableOpacity onPress={() => this.speechtotex()}> 
+          <Image
+                style={{ width: 40, height: 60, alignItems:'center' }}
+                source={cloud}
+              />
+              </TouchableOpacity>
+              </View>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Speech To Text
         </Text>
-        <TouchableOpacity onPress={() => this.speechtotex()}>
-        <Text style={styles.instructions}>
-          Tap here to start Speech To Text
-        </Text>
-        </TouchableOpacity>
         <Text style={styles.instructions}>
           {this.state.text}
         </Text>
